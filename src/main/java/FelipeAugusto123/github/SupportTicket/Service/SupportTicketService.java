@@ -80,6 +80,7 @@ public class SupportTicketService {
     public void closeSupportTicket(Long id) {
         SupportTicket existingSupportTicket = findById(id);
         existingSupportTicket.setStatus(Status.CLOSED);
+        existingSupportTicket.setClosedAt(LocalDateTime.now());
         repository.save(existingSupportTicket);
     }
 
