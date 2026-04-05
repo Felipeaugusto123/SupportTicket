@@ -9,9 +9,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Setter
 @Getter
@@ -20,7 +22,7 @@ import java.util.Set;
 @Entity
 @SuperBuilder
 @DiscriminatorValue("TEC_TI")
-public class TecTI extends User {
+public class TecTI extends User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Position position;
@@ -29,4 +31,18 @@ public class TecTI extends User {
     @JsonIgnore
     private Set<SupportTicket> assignedTickets = new HashSet<>();
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        if (position == Position.SENIOR || position == Position.PLENO) {
+            return List.of(new SimpleGrantedAuthority("ROLE_SENIOR"), new SimpleGrantedAuthority("ROLE_PLENO"), new SimpleGrantedAuthority("ROLE_JUNIOR"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_JUNIOR"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
 }

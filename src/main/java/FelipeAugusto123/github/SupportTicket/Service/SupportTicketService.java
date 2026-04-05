@@ -34,23 +34,14 @@ public class SupportTicketService {
         return repository.findById(id).orElseThrow(() -> new BadRequest("SupportTicket not found with id: " + id));
     }
 
-    public User findByIdUser(Long id) {
-        return userService.findById(id);
-    }
-
-    public TecTI findByIdTecTi(Long id) {
-        return tecTIService.findById(id);
-    }
-
     @Transactional
     public SupportTicket createSupportTicket(SupportTicketRequest supportTicket) {
-        User user = findByIdUser(supportTicket.getUserID());
-        TecTI tecTI = findByIdTecTi(supportTicket.getTecTIID());
+        User user = userService.findById(supportTicket.getUserID());
+        TecTI tecTI = tecTIService.findById(supportTicket.getTecTIID());
 
         return repository.save(SupportTicket.builder()
                 .title(supportTicket.getTitle())
                 .description(supportTicket.getDescription())
-                .createdAt(supportTicket.getCreatedAt())
                 .createdAt(LocalDateTime.now())
                 .priority(Priority.fromString(supportTicket.getPriority()))
                 .status(Status.fromString(supportTicket.getStatus()))
@@ -62,12 +53,11 @@ public class SupportTicketService {
     @Transactional
     public SupportTicket updateSupportTicket(Long id, SupportTicketRequest supportTicket) {
         SupportTicket existingSupportTicket = findById(id);
-        User user = findByIdUser(supportTicket.getUserID());
-        TecTI tecTI = findByIdTecTi(supportTicket.getTecTIID());
+        User user = userService.findById(supportTicket.getUserID());
+        TecTI tecTI = tecTIService.findById(supportTicket.getTecTIID());
 
         existingSupportTicket.setTitle(supportTicket.getTitle());
         existingSupportTicket.setDescription(supportTicket.getDescription());
-        existingSupportTicket.setCreatedAt(supportTicket.getCreatedAt());
         existingSupportTicket.setPriority(Priority.fromString(supportTicket.getStatus()));
         existingSupportTicket.setUser(user);
         existingSupportTicket.setStatus(Status.fromString(supportTicket.getStatus()));

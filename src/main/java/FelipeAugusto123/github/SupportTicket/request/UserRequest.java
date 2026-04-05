@@ -1,6 +1,7 @@
 package FelipeAugusto123.github.SupportTicket.request;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -22,5 +23,10 @@ public class UserRequest {
     @NotEmpty(message = "CPF cannot be empty")
     @NotNull(message = "CPF cannot be null")
     private String CPF;
+
+    @NotNull
+    @NotEmpty
+    @Min(4)
+    private String password;
 
 }

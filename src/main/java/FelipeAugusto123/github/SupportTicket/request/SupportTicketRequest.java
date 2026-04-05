@@ -2,12 +2,17 @@ package FelipeAugusto123.github.SupportTicket.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
+@NoArgsConstructor
 @Data
+@AllArgsConstructor
+@Builder
 public class SupportTicketRequest {
 
     @NotEmpty(message = "Title cannot be empty")
@@ -16,7 +21,6 @@ public class SupportTicketRequest {
     @NotEmpty(message = "Description cannot be empty")
     @NotNull(message = "Description cannot be null")
     private String description;
-    private LocalDateTime createdAt;
 
     @NotNull(message = "Priority cannot be null")
     @NotEmpty(message = "Priority cannot be blank")
@@ -31,5 +35,4 @@ public class SupportTicketRequest {
 
     @NotNull(message = "TecTIID cannot be null")
     private Long tecTIID;
-
 }

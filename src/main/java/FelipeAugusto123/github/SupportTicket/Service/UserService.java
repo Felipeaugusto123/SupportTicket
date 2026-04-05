@@ -21,6 +21,7 @@ public class UserService {
         return repository.save(User.builder().name(request.getName())
                 .email(request.getEmail())
                 .CPF(request.getCPF())
+                .password(request.getPassword())
                 .build());
     }
 
@@ -38,6 +39,7 @@ public class UserService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setCPF(request.getCPF());
+        user.setPassword(request.getPassword());
         return repository.save(user);
     }
 

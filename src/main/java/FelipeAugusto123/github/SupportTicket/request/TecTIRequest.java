@@ -1,6 +1,7 @@
 package FelipeAugusto123.github.SupportTicket.request;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -26,5 +27,9 @@ public class TecTIRequest {
     @NotEmpty(message = "Position cannot be blank")
     private String position;
 
+    @NotNull
+    @NotEmpty(message = "Password cannot be empty")
+    @Min(4)
+    private String password;
 
 }

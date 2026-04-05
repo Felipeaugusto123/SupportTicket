@@ -28,22 +28,12 @@ public class UserController {
         return ResponseEntity.ok(service.findByCPF(CPF));
     }
 
-    @PostMapping("/CreateUser")
-    public ResponseEntity<User> createUser(@RequestBody @Valid UserRequest user) {
-        return ResponseEntity.ok(service.createUser(user));
-    }
-
-    @PostMapping("/CreateTecTI")
-    public ResponseEntity<User> createTecTI(@RequestBody @Valid TecTIRequest tecTI) {
-        return ResponseEntity.ok(tecTIService.createTecTI(tecTI));
-    }
-
-    @PutMapping("UpdateUser/{id}")
+    @PutMapping("updateUser/{id}")
     public ResponseEntity<User> updateUser(@RequestParam Long id, @RequestBody @Valid UserRequest user) {
         return ResponseEntity.ok(service.updateUser(id, user));
     }
 
-    @PutMapping("UpdateTecTI/{id}")
+    @PutMapping("updateTecTI/{id}")
     public ResponseEntity<User> updateTecTI(@RequestParam Long id, @RequestBody @Valid TecTIRequest tecTI) {
         return ResponseEntity.ok(tecTIService.updateTecTi(id, tecTI));
     }

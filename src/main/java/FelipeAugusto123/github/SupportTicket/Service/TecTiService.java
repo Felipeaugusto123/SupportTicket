@@ -32,6 +32,7 @@ public class TecTiService {
                 .email(request.getEmail())
                 .CPF(request.getCPF())
                 .position(Position.fromString(request.getPosition().toUpperCase()))
+                .password(request.getPassword())
                 .build());
     }
 
@@ -42,6 +43,7 @@ public class TecTiService {
         user.setEmail(request.getEmail());
         user.setCPF(request.getCPF());
         user.setPosition(Position.fromString(request.getPosition()));
+        user.setPassword(request.getPassword());
         return repository.save(user);
     }
 
